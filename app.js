@@ -34,7 +34,6 @@ app.set('view engine', 'pug');
 
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -43,18 +42,86 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+// user swagger config
 /**
  * @swagger
- * /users:
+ * /users/get:
+ *  get:
+ *    description: Get all users in the database
+ *    responses:
+ *      200:
+ *        description: Success
+ *
+ */
+
+/**
+ * @swagger
+ * /users/delete:
  *  post:
- *    description: Express say respond
+ *    description: Delete a user by id
  *    parameters:
- *    - name: user
+ *    - name: id
+ *      in: formData
+ *      description: user id
+ *      required: true
+ *      type: string
+ *      default: '5094'
+ *    responses:
+ *      200:
+ *        description: Success
+ *      404:
+ *        description: False
+ *
+ */
+
+/**
+ * @swagger
+ * /users/insert:
+ *  post:
+ *    description: Insert user in to database
+ *    parameters:
+ *    - name: name
  *      description: user name
  *      in: formData
  *      required: true
  *      type: string
  *      default: 'user'
+ *    - name: email
+ *      description: email address
+ *      in: formData
+ *      required: true
+ *      type: string
+ *      default: 'user@address'
+ *    responses:
+ *      200:
+ *        description: Success
+ *
+ */
+
+/**
+ * @swagger
+ * /users/update:
+ *  post:
+ *    description: Update a user using userID
+ *    parameters:
+ *    - name: id
+ *      description: user id
+ *      in: formData
+ *      required: true
+ *      type: string
+ *      default: 'user'
+ *    - name: name
+ *      description: user name
+ *      in: formData
+ *      required: true
+ *      type: string
+ *      default: 'user'
+ *    - name: email
+ *      description: email address
+ *      in: formData
+ *      required: true
+ *      type: string
+ *      default: 'user@address'
  *    responses:
  *      200:
  *        description: Success

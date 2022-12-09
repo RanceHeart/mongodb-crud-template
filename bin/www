@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 const app = require('../app');
+
 const debug = require('debug')('mongodb-crud-template:server');
 const http = require('http');
 
@@ -18,17 +19,13 @@ require('dotenv').config({ path: path.join(__dirname, `../.env.${process.env.NOD
  * Get port from environment and store in Express.
  */
 
-console.log(path.join(__dirname, `../.env.${process.env.NODE_ENV}`) )
-console.log(process.env.PORT )
-
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -43,7 +40,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
