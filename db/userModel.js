@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 const path = require("path");
-require('dotenv').config({ path: path.join(__dirname, `../.env.${process.env.NODE_ENV}`)});
+const config = require('../configuration/configuration')
+require('dotenv').config({ path: path.join(__dirname, `../.env.${config.env}`)});
 
-
-const MONGODB_URL = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`;
-mongoose.connect(`${MONGODB_URL}/test`)
+mongoose.connect(`mongodb://${config.db.host}:${config.db.port}/test`)
 
 const userSchema = new mongoose.Schema({
   name: {type: String, required: true},
